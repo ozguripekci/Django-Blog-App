@@ -7,7 +7,8 @@
     {% for obj in object_list %}
     <div class="col-4">
 
-        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 55rem; height:40rem; ">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 55rem; height:42rem; ">
+            <h5>Author: {{ user }}</h5>
             <img src="{{ obj.image.url }}" class="card-img-top" alt="post_image" style="width:40rem; height: 25em; align-self:center;">
             <hr>
             <div class="card-body">

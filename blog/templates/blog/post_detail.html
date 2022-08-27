@@ -2,10 +2,22 @@
 
 
 {% block content %}
-
+    <h5>Author: {{ user }}</h5>
     <h1>{{object.title}}</h1>
     <img src="{{ object.image.url }}"  alt="">
     <p>{{object.content}}</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+<br>
+{% for comment in object.comments %}
+    <p>Commented by {{ user }}</p>
+    {{ comment.content }}
+    <hr>
+{% endfor %}
+    
 
 {% endblock content %}
     

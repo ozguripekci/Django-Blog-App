@@ -19,7 +19,7 @@ class Category(models.Model):
 class Post(models.Model):
     OPTIONS = {
         ('draft', 'Draft'),
-        ('published', 'published'),
+        ('published', 'Publish'),
     }
     title= models.CharField(max_length=50)
     content = models.TextField(max_length=100)
@@ -42,6 +42,9 @@ class Post(models.Model):
 
     def like_count(self):
         return self.like_set.all().count()
+
+    def comments(self):
+        return self.comment_set.all()
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
