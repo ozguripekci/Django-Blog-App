@@ -19,11 +19,11 @@ class Category(models.Model):
 class Post(models.Model):
     OPTIONS = {
         ('draft', 'Draft'),
-        ('public', 'Published'),
+        ('published', 'published'),
     }
     title= models.CharField(max_length=50)
     content = models.TextField(max_length=100)
-    image = models.ImageField(upload_to=user_directory_path, default='rating.jpeg')
+    image = models.ImageField(upload_to=user_directory_path, default='rating.png')
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     publish_date= models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
