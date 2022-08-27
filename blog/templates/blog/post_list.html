@@ -2,12 +2,13 @@
 
 
 {% block content %}
-<h1 style="text-align: center;">Clarusway Blog</h1>
+<h1 style="text-align: center;">Rate</h1>
 <div class="mt-5" >
     {% for obj in object_list %}
-    <div class="col-4">
-        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 55rem; height:42rem; ">
+    <div class="col-4" >
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 55rem; height:43rem; ">
             <h6>Author: {{ obj.author }}</h6>
+            <hr>
             <img src="{{ obj.image.url }}" class="card-img-top" alt="post_image" style="width:40rem; height: 25em; align-self:center;">
             <hr>
             <div class="card-body">

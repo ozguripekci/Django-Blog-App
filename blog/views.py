@@ -1,7 +1,9 @@
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from .models import Post, Like
 from .forms import PostForm, CommentForm
+from django.http import HttpResponse
+
 # Create your views here.
 def  post_list(request):
     qs = Post.objects.filter(status = 'published')
@@ -47,6 +49,9 @@ def post_detail(request, slug):
 
 def post_update(request, slug):
     obj = get_object_or_404(Post, slug=slug)
+    if request.user.id != obj.author.id:
+        return redirect('blog:detail', slug=slug)
+
     form = PostForm(request.POST or None, request.FILES or None, instance = obj)
     if form.is_valid():
         form.save()
@@ -60,6 +65,8 @@ def post_update(request, slug):
 
 def post_delete(request, slug):
     obj = get_object_or_404(Post, slug=slug)
+    if request.user.id != obj.author.id:
+        return redirect('blog:detail', slug=slug)
     if request.method == "POST":
         obj.delete()
         return redirect('blog:list')

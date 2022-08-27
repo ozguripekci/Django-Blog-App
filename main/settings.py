@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #my apps
     'blog',
+    'users',
+    #3rd party libraries
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +132,4 @@ STATICFILES_DIR = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
