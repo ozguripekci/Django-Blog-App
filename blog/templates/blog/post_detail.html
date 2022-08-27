@@ -2,7 +2,6 @@
 
 
 {% block content %}
-    <h5>Author: {{ user }}</h5>
     <h1>{{object.title}}</h1>
     <img src="{{ object.image.url }}"  alt="">
     <p>{{object.content}}</p>
@@ -13,10 +12,26 @@
     </form>
 <br>
 {% for comment in object.comments %}
-    <p>Commented by {{ user }}</p>
+    <p>Commented by {{ comment.user }}</p>
     {{ comment.content }}
     <hr>
 {% endfor %}
+
+<form action="{% url 'blog:like' object.slug %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="post">
+    <input type="hidden" name="user">
+    <button type="submit">Like</button>{{object.like_count}}
+</form>
+<br>
+
+{% if user.id == object.author.id %}
+    <a class="btn btn-danger" href="{% url 'blog:delete' object.slug %}">Delete</a>
+    <a class="btn btn-primary" href="{% url 'blog:update' object.slug %}">Update</a>
+{% endif %}
+    
+
+    
     
 
 {% endblock content %}

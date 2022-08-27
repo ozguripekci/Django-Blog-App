@@ -6,7 +6,8 @@
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-primary" href="{% url 'blog:detail' object.slug %}">Cancel</a>
+        <button type="submit" class="btn btn-success">Update</button>
     </form>
 
 {% endblock content %}

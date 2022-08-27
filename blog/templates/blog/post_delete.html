@@ -6,8 +6,8 @@
     <p> Are you sure to delete {{object}}?</p>
     <form action="" method="POST">
         {% csrf_token %}
-        <a href="{% url 'blog:list' %}">Cancel</a>
-        <button type="submit">Yes</button>
+        <a class="btn btn-primary" href="{% url 'blog:detail' object.slug %}">Cancel</a>
+        <button class="btn btn-danger" type="submit">Yes</button>
     </form>
 
 {% endblock content %}
