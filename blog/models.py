@@ -30,13 +30,18 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default='draft')
     slug = models.SlugField(blank=True, unique=True)
-
-    class Meta:
-        verbose_name_plural = 'Posts' 
     
     def __str__(self):
         return self.title
 
+    def comment_count(self):
+        return self.comment_set.all().count()
+
+    def view_count(self):
+        return self.postview_set.all().count()
+
+    def like_count(self):
+        return self.like_set.all().count()
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
