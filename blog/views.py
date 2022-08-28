@@ -54,11 +54,12 @@ def post_detail(request, slug):
 def post_update(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     if request.user.id != obj.author.id:
+        messages.warning(request, "You are not allowed to update this post!")
         return redirect('blog:detail', slug=slug)
-
     form = PostForm(request.POST or None, request.FILES or None, instance = obj)
     if form.is_valid():
         form.save()
+        messages.success(request, "Post is updated!")
         return redirect('blog:list')
 
     context = {
@@ -71,9 +72,11 @@ def post_update(request, slug):
 def post_delete(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     if request.user.id != obj.author.id:
+        messages.warning(request, "You are not allowed to delete this post!")
         return redirect('blog:detail', slug=slug)
     if request.method == "POST":
         obj.delete()
+        messages.success(request, "Post is deleted!")
         return redirect('blog:list')
     context = {
         'object' : obj
@@ -90,4 +93,4 @@ def like(request, slug):
         else:
             Like.objects.create(user=request.user, post=obj)
         return redirect('blog:detail', slug=slug)
-    
+    return redirect('blog:detail', slug=slug)
